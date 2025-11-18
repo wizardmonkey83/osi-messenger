@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.Socket;
+import java.net.ServerSocket;
 
 public class Server {
     public static String encrypt(String message, int shift) {
@@ -27,7 +28,9 @@ public class Server {
         String message = "";
 
         try {
-            Socket socket = new Socket("localhost", 1234);
+            ServerSocket serverSocket = new ServerSocket(1234);
+            Socket socket = serverSocket.accept();
+
             InputStream inputStream = socket.getInputStream();
             byte[] buffer = new byte[1024];
             int bytesRead = inputStream.read(buffer);
